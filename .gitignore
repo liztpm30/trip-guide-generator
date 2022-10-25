@@ -1,0 +1,13 @@
+.DS_Store
+################################
+### Generic ignores
+*.lock
+.metadata/
+dist/
+target/
+bin/
+obj/
+build/
+out/
+packages/
+*.json
