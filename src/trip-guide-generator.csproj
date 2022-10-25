@@ -7,4 +7,10 @@
     <RootNamespace>trip_guide_generator</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Microsoft.Azure.Cosmos" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.31.0" />
+  </ItemGroup>
 </Project>

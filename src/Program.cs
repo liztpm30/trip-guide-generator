@@ -1,4 +1,8 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Builder.Extensions;
+using Microsoft.Azure.Cosmos;
+using trip_guide_generator;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -12,6 +16,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+builder.Services.Configure<AppOptions>(
+    builder.Configuration.GetSection(AppOptions.Section));
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
