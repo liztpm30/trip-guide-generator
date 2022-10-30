@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace trip_guide_generator.Model
 {

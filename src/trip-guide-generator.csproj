@@ -10,7 +10,6 @@
   <ItemGroup>
     <None Remove="Microsoft.Azure.Cosmos" />
     <None Remove="Microsoft.EntityFrameworkCore" />
-    <None Remove="Data\" />
     <None Remove="Model\" />
     <None Remove="Microsoft.EntityFrameworkCore.Cosmos" />
     <None Remove="Services\" />
@@ -21,7 +20,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="6.0.10" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Model\" />
     <Folder Include="Services\" />
   </ItemGroup>

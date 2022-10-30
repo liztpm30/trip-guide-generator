@@ -1,11 +1,5 @@
-﻿using System.Configuration;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Builder.Extensions;
-using Microsoft.Azure.Cosmos;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Azure.Cosmos;
 using trip_guide_generator;
-using trip_guide_generator.Data;
 using trip_guide_generator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +13,9 @@ string databaseName = dbConfig.GetSection("DatabaseName").Value;
 string containerName = dbConfig.GetSection("ContainerName").Value;
 string account = dbConfig.GetSection("Account").Value;
 string key = dbConfig.GetSection("Key").Value;
-Microsoft.Azure.Cosmos.CosmosClient client = new Microsoft.Azure.Cosmos.CosmosClient(account, key);
+CosmosClient client = new CosmosClient(account, key);
 CosmosDBService cosmosDbService = new CosmosDBService(client, databaseName, containerName);
-Microsoft.Azure.Cosmos.DatabaseResponse database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
+DatabaseResponse database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
 await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
 
 

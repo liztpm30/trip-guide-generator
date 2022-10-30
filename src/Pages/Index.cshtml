@@ -9,3 +9,19 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<p>Enter a Username:</p>
+
+<form method="post">
+    Name:
+    <input asp-for="User!.UserName" />
+    Guide number of days:
+    <input asp-for="Guide!.NumberOfDays" />
+    Activity name:
+    <input asp-for="DayActivity!.ActName" />
+    Activity description:
+    <input asp-for="DayActivity!.Description" />
+    Intagram Link:
+    <input asp-for="DayActivity!.InstagramLink" />
+    <input type="submit" />
+</form>
+
