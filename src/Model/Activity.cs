@@ -2,19 +2,19 @@
 
 namespace trip_guide_generator.Model
 {
-    public class DayActivity
+    public class Activity
     {
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonProperty(PropertyName = "actName")]
-        public string ActName { get; set; }
+        public string? ActName { get; set; }
 
         [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [JsonProperty(PropertyName = "instagramLink")]
-        public string InstagramLink { get; set; }
+        public string? InstagramLink { get; set; }
     }
 }
 

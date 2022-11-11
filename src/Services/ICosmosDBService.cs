@@ -5,10 +5,10 @@ namespace trip_guide_generator.Services
 {
     public interface ICosmosDBService
     {
-        Task<User> GetUserByUserNameAsync(string userName);
-        Task<User> GetUserByIdAsync(string id);
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(string id, User item);
+        Task<AppUser> GetUserByUserNameAsync(string userName);
+        Task<AppUser> GetUserByIdAsync(string id);
+        Task AddUserAsync(AppUser user);
+        Task UpdateUserAsync(string id, AppUser item);
         Task DeleteUserAsync(string id);
     }
 }

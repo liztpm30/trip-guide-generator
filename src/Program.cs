@@ -20,6 +20,7 @@ await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
 
 
 builder.Services.AddSingleton<ICosmosDBService>(cosmosDbService);
+builder.Services.AddScoped<IUserService, UserService>();
 
 //Pass App Settings
 builder.Services.Configure<AppOptions>(

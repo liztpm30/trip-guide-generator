@@ -10,12 +10,12 @@ namespace trip_guide_generator.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    private readonly ICosmosDBService _cosmosDB; 
+    private readonly IUserService _userService; 
 
-    public IndexModel(ILogger<IndexModel> logger, ICosmosDBService cosmosDB)
+    public IndexModel(ILogger<IndexModel> logger, IUserService userService)
     {
         _logger = logger;
-        _cosmosDB = cosmosDB;
+        _userService = userService;
     }
 
     public IActionResult OnGet()
@@ -24,44 +24,58 @@ public class IndexModel : PageModel
     }
 
     [BindProperty]
-    public User? User { get; set; }
+    public AppUser? User { get; set; }
 
     [BindProperty]
     public Guide? Guide { get; set; }
 
     [BindProperty]
-    public DayActivity? DayActivity { get; set; }
+    public Activity? Activity { get; set; }
 
     public async Task<IActionResult> OnPost()
     {
-        if (DayActivity != null && Guide != null && User != null)
-        {
-            Guide.DayActivities = new DayActivity[1];
-            DayActivity.Id = Guide.DayActivities.Count().ToString();
-            Guide.DayActivities[0] = DayActivity;
-            Guide.Id = Guide.DayActivities.Count().ToString();
+        var user = await _userService.GetUserbyUserName("liztesting");
 
-            User.Guides = new Guide[1];
-            User.Guides[0] = Guide;
-            User.Id = Guid.NewGuid().ToString();
+        var guide = user.Guides[0];
 
-            _logger.LogInformation("********* The USER object ************");
-            string strjson = JsonSerializer.Serialize<User>(User);
-            _logger.LogInformation(strjson);
+        guide.GuideName = "This is the guide";
 
-            _logger.LogInformation("********* The Guide object ************");
-            string guidestrjson = JsonSerializer.Serialize<Guide>(Guide);
-            _logger.LogInformation(guidestrjson);
+        await _userService.EditGuide("liztesting", guide);
 
-            try
-            {
-                await _cosmosDB.AddUserAsync(User);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("user data could not be saved");
-            }
-        }
+        //if (Activity != null && Guide != null && User != null)
+        //{
+        //    //This will be the first activity
+        //    Activity.Id = "1";
+
+        //    var dayPlan = new DayPlan();
+        //    dayPlan.Id = "1";
+        //    dayPlan.DayNumber = 1;
+        //    dayPlan.Activities = new List<Activity>
+        //    {
+        //        Activity
+        //    };
+
+        //    Guide.PlanPerDay = new List<DayPlan>
+        //    {
+        //        dayPlan
+        //    };
+        //    Guide.Id = "1";
+
+        //    User.Guides = new List<Guide>
+        //    {
+        //        Guide
+        //    };
+        //    User.Id = Guid.NewGuid().ToString();
+
+        //    try
+        //    {
+        //        await _userService.AddUser(User);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogError("user data could not be saved");
+        //    }
+        //}
 
         return RedirectToPage("Index");
     }
